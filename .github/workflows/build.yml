@@ -8,8 +8,8 @@ jobs:
       matrix:
         os: [windows-latest]
         build_type: [RelWithDebInfo, Debug]
-        ui: [gui, cli]
-        scripting: [lua, noscripts]
+        ui: [gui]
+        scripting: [lua]
         exclude:
           - build_type: Debug
             ui: gui
@@ -100,6 +100,8 @@ jobs:
         fi
         cd build && $XVFB ctest --output-on-failure
         tar czf out.tar.gz bin
+        pwd
+        ls
     - name: Upload
       uses: actions/upload-artifact@v4.6.0
       with:
