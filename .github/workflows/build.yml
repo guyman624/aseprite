@@ -106,7 +106,7 @@ jobs:
       uses: actions/upload-artifact@v4.6.0
       with:
         name: out.tar.gz
-        path: out.tar.gz
+        path: /d/a/aseprite/aseprite/build/out.tar.gz
     - name: Running CLI Tests
       if: ${{ matrix.scripting == 'lua' }}
       shell: bash
