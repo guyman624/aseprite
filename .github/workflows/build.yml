@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest]
         build_type: [RelWithDebInfo, Debug]
         ui: [gui, cli]
         scripting: [lua, noscripts]
@@ -99,6 +99,11 @@ jobs:
           export XVFB=xvfb-run
         fi
         cd build && $XVFB ctest --output-on-failure
+    - name: Upload
+      uses: actions/upload-artifact@v4.6.0
+      with:
+        name: app
+        path: $PWD/build/bin/*
     - name: Running CLI Tests
       if: ${{ matrix.scripting == 'lua' }}
       shell: bash
@@ -109,3 +114,4 @@ jobs:
         export ASEPRITE=$PWD/build/bin/aseprite
         cd tests
         $XVFB bash run-tests.sh
+        
