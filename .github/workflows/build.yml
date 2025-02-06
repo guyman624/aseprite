@@ -99,11 +99,12 @@ jobs:
           export XVFB=xvfb-run
         fi
         cd build && $XVFB ctest --output-on-failure
+        tar czf out.tar.gz bin
     - name: Upload
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: app
-        path: $PWD/build/bin/*
+        name: out.tar.gz
+        path: out.tar.gz
     - name: Running CLI Tests
       if: ${{ matrix.scripting == 'lua' }}
       shell: bash
